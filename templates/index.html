@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<html>
+
+<head>
+  
+    <meta charset="UTF-8">
+
+     <title> Aditya Stock</title>
+</head>     
+
+ 
+<form action = "" method = "POST">
+    {% csrf_token %} 
+    <label for="your_name">classes_attended: </label>
+    <input id="classes_attended" type="text" name="classes_attended"> <br>
+
+    <label for="your_name">classes_held: </label>
+    <input id="classes_held" type="text" name="classes_held">
+    <input type="submit" value="OK">
+</form>
+<br>
+classes_attended : {{classes_attended}}<br>
+classes_held : {{classes_held}}<br>
+attendance_percentage : {{attendance_percentage}}<br>
+
+  <body>
+
+
+    

@@ -1,0 +1,134 @@
+{% extends 'base.html'%}
+{% block content %}
+
+ <!-- General elements -->
+ <h4
+ class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
+>
+              Elements
+            </h4>
+            
+<form action = "/" method = "POST"> {% csrf_token %}
+            <div
+              class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
+            >
+              <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">Enter Class Attended</span>
+                <input
+                  name="classes_attended"
+                  required
+                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="Enter Class Attended"
+                />
+              </label>
+<br>
+              <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">Enter Class Held</span>
+                <input
+                  name="classes_held"
+                  required
+                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="Enter Class Held "
+                />
+              </label>
+
+             
+
+              <label class="block mt-4 text-sm">
+                <span class="text-gray-700 dark:text-gray-400">
+                  Requested Limit
+                </span>
+                <select
+                  class="block w-full mt-1 text-sm dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 form-select focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray"
+                >
+                  <option>75</option>
+                  <option>60</option>
+                  <option>65</option>
+                  <option>75</option>
+                  <option>80</option>
+                  <option>85</option>
+                  <option>90</option>
+                </select>
+              </label>
+<br>
+              <div>
+                <button
+                  class="px-5 py-3 font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                >
+                  Large button
+                </button>
+              </div>
+        
+
+</form>
+
+              <label class="block mt-4 text-sm">
+                <span class="text-gray-700 dark:text-gray-400">Classes Attended : {{classes_attended}}<br>
+                  Classes Held : {{classes_held}}<br>
+                  Attendance Percentage : {{attendance_percentage}} %<br>
+                  Need to Attend : {{need_to_attend}}
+                </span>
+              
+              </label>
+
+              
+            </div>
+
+ <!-- ------------------------------------------------------------------------------------------------------ -->
+ <div>
+  <canvas id="myChart" width="40" height="40"></canvas>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+<script>
+  var class_data = JSON.parse("{{class_data|escapejs}}");
+
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Classes Attended', ' Classes Held', 'Attendance Percentage', 'Need to Attend'],
+      datasets: [{
+        label: ' ',
+        data: class_data,
+        backgroundColor: [
+                'rgb(	6	,148,	162)',
+                'rgb(28,	100,	242)',
+                'rgb(	126	,58	,242)',
+                'rgb(	249	,238	,5)',
+               
+           ],
+            borderColor: [
+                'rgb(	243	,246	,244)',
+                'rgb(	243	,246	,244)',
+                'rgb(	243	,246	,244)',
+                'rgb(	243	,246	,244)',
+                
+                
+            ],
+            borderWidth: 4
+
+      
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
+
+ 
+ <!-- ---------------------------------------------------------------------------------------------------------------- -->
+       
+         
+          
+{% endblock content %}
+ 
